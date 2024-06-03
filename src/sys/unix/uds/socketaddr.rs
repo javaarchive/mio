@@ -20,14 +20,14 @@ pub struct SocketAddr {
 
 struct AsciiEscaped<'a>(&'a [u8]);
 
-enum AddressKind<'a> {
+pub enum AddressKind<'a> {
     Unnamed,
     Pathname(&'a Path),
     Abstract(&'a [u8]),
 }
 
 impl SocketAddr {
-    fn address(&self) -> AddressKind<'_> {
+    pub fn address(&self) -> AddressKind<'_> {
         let offset = path_offset(&self.sockaddr);
         // Don't underflow in `len` below.
         if (self.socklen as usize) < offset {
@@ -46,6 +46,14 @@ impl SocketAddr {
             AddressKind::Abstract(&path[1..len])
         } else {
             AddressKind::Pathname(OsStr::from_bytes(&path[..len - 1]).as_ref())
+        }
+    }
+
+    pub fn try_path(&self) -> Option<&Path> {
+        if let AddressKind::Pathname(path) = self.address() {
+            Some(path)
+        } else {
+            None
         }
     }
 }
