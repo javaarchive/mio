@@ -12,7 +12,7 @@ use std::{ascii, fmt};
 ///
 /// [`net::SocketAddr`]: std::os::unix::net::SocketAddr
 /// [`accept`]: #method.accept
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct SocketAddr {
     sockaddr: libc::sockaddr_un,
     socklen: libc::socklen_t,
