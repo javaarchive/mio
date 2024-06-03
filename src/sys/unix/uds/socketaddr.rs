@@ -20,7 +20,7 @@ pub struct SocketAddr {
 
 struct AsciiEscaped<'a>(&'a [u8]);
 
-#[derive(Debug, Display)]
+#[derive(Debug)]
 pub enum AddressKind<'a> {
     Unnamed,
     Pathname(&'a Path),
