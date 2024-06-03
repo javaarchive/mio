@@ -49,7 +49,7 @@ impl SocketAddr {
         }
     }
 
-    pub fn try_path(&self) -> Option<&Path> {
+    pub fn try_get_pathname(&self) -> Option<&Path> {
         if let AddressKind::Pathname(path) = self.address() {
             Some(path)
         } else {
